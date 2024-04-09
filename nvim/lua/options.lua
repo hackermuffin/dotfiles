@@ -18,9 +18,26 @@ vim.api.nvim_create_user_command("Vterm", function()
 end, {})
 
 -- start NERDTree on startup
-vim.api.nvim_create_autocmd("StdinReadPre", {
-	command = "let s:std_in=1",
-})
+local group = vim.api.nvim_create_augroup("NERDTreeAutostart", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {
-	command = 'NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif',
+	callback = function()
+		-- local argc = vim.api.nvim_eval("argc()")
+		local argc = vim.fn.argc()
+		local argv = vim.fn.argv()
+		if argc == 0 then
+			-- if no args, start NERDTree focused
+			vim.cmd("NERDTree")
+		elseif argc == 1 and vim.fn.isdirectory(argv[1]) == 1 then
+			-- if directory, cd to directory and start NERDTree focuses with empty buffer
+			vim.cmd("execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0]")
+		else
+			vim.cmd("NERDTree | wincmd p")
+		end
+	end,
+	group = group,
 })
+
+-- close NERDTree if last open buffer
+vim.cmd([[
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+]])
