@@ -1,5 +1,3 @@
--- set leader key
-vim.cmd('let mapleader=","')
 
 -- start a horizontal split terminal
 vim.api.nvim_create_user_command("Hterm", function()
