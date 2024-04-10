@@ -20,6 +20,11 @@ return {
 			end,
 			group = group,
 		})
+		-- start NERDTree on session load
+		vim.api.nvim_create_autocmd("SessionLoadPost", {
+			command = "NERDTree | wincmd p",
+			group = group,
+		})
 
 		-- close NERDTree if last open buffer
 		vim.api.nvim_create_augroup("NERDTreeAutoquit", { clear = true })
