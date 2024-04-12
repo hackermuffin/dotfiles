@@ -27,9 +27,10 @@ return {
 		})
 
 		-- close NERDTree if last open buffer
-		vim.api.nvim_create_augroup("NERDTreeAutoquit", { clear = true })
+		group = vim.api.nvim_create_augroup("NERDTreeAutoquit", { clear = true })
 		vim.api.nvim_create_autocmd("BufEnter", {
 			command = "if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif",
+			group = group,
 		})
 	end,
 }
