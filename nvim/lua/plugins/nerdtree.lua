@@ -32,5 +32,8 @@ return {
 			command = "if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif",
 			group = group,
 		})
+
+		-- register find files hotkey
+		vim.keymap.set("n", "<Leader>nf", "<cmd>NERDTreeFind<cr>", { desc = "Find current file in NERDTree" })
 	end,
 }
