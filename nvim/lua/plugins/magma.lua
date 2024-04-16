@@ -17,7 +17,7 @@ return {
 				"-m",
 				"pip",
 				"install",
-				"pynvim",
+				"pynvim>=0.5",
 				"jupyter-client",
 				"ueberzug",
 				"pillow",
