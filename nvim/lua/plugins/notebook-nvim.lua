@@ -50,12 +50,12 @@ return {
 		vim.api.nvim_create_autocmd("BufRead", {
 			pattern = "*.ipynb",
 			command = "MagmaInit",
-			--group = "IpynbMagmaInit",
+			group = "IpynbMagmaInit",
 		})
 		vim.api.nvim_create_autocmd("User", {
 			pattern = { "MagmaInitPost" },
 			callback = _G.define_all_cells,
-			--group = "IpynbMagmaInit",
+			group = "IpynbMagmaInit",
 		})
 	end,
 }
