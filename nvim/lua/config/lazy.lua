@@ -20,6 +20,7 @@ require("lazy").setup({
 			colorscheme = "onedark",
 		} },
 		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "lazyvim.plugins.extras.lang.haskell" },
 		{ import = "lazyvim.plugins.extras.lang.python" },
 		{ import = "plugins" },
 	},
