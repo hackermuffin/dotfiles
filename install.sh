@@ -30,10 +30,7 @@ function install_config_folder() {
 
 # nvim
 install_config_folder nvim
-#[-e ~/.config/nvim/ ] && mv ~/.config/nvim/ ~/.config/nvim.orig/
-#ln -s $PWD/nvim ~/.config/nvim
 
 # hyprland
-#[-e ~/.config/hypr/ ] && mv ~/.config/hypr/
-#ln -s $PWD/hypr ~/.config/hypr
-#[-e ~/.config/waybar/ ] && ln -s $PWD/waybar ~/.config/waybar
+install_config_folder hypr
+install_config_folder waybar
