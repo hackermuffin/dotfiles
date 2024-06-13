@@ -1,25 +1,40 @@
 #!/bin/bash
-
-# Script to symlink all config files into the correct location
+set -e
 
 # Grab script folder
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-# inital setup
+# Inital setup
 mkdir -p ~/.config
 
 function install_config_folder() {
 	# Get name from arg
 	name=$1
 
+	# Other useful vars
+	target_path=~/.config/$name
+	backup_path=$target_path.bak
+	source_path=$SCRIPT_DIR/$name
+
+	# Test if symlink already pointing at correct folder
+	hash readlink >/dev/null || {
+		echo "readlink command required"
+		exit
+	}
+	link_path=$(readlink $target_path) || true
+	if [ "$link_path" = "$source_path" ]; then
+		echo "Config for $name already installed at $target_path"
+		return
+	fi
+
 	# Make backup if existing folder
-	if [ -e ~/.config/$name ]; then
-		if [ -e ~/.config/$name.bak ]; then
-			echo "Backup file ~/.config/$name.bak already exists, skipping..."
+	if [ -e $target_path ]; then
+		if [ -e $backup_path ]; then
+			echo "Backup file $backup_path already exists, skipping..."
 			return
 		else
-			mv ~/.config/$name ~/.config/$name.bak
-			echo "Existing $name config backed up to ~/.config/$name.bak."
+			mv $target_path $backup_path
+			echo "Existing $name config backed up to $backup_path."
 		fi
 	fi
 
