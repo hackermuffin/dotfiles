@@ -49,3 +49,6 @@ install_config_folder nvim
 # hyprland
 install_config_folder hypr
 install_config_folder waybar
+
+# kitty
+install_config_folder kitty
