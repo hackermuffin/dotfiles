@@ -16,3 +16,9 @@ vim.api.nvim_create_user_command("Vterm", function()
     :startinsert
   ]])
 end, {})
+
+-- marking mode
+vim.api.nvim_create_user_command("MarkingMode", function()
+	vim.b.autoformat = false
+	vim.opt.colorcolumn = "80"
+end, {})
